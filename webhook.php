@@ -11,20 +11,26 @@ $authorization = "Authorization: Bearer {$accessToken}";
 $storeURL = "https://6dep.zucandu.com";
 $appURL = "https://asapheat.com";
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL,"{$storeURL}/api/v1/app/webhook/create");
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json' , $authorization]);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-	'url' => "{$appURL}/receive-webhook-data.php", // URL that receive data from the Zucandu online store
-	'event' => "product.created",
-]));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-$resp = curl_exec($ch);
-curl_close($ch);
+try {
+    $ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL,"{$storeURL}/api/v1/app/webhook/create");
+	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'Accept: application/json', $authorization]);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+		'url' => "{$appURL}/receive-webhook-data.php", // URL that receive data from the Zucandu online store
+		'event' => "product.created",
+	]));
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$resp = curl_exec($ch);
+	curl_close($ch);
 
-var_dump($resp);
+	var_dump(json_decode($resp));
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
+
+
 
 exit;
