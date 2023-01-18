@@ -1,0 +1,12 @@
+{
+    "name": "zucandu/oauth-app",
+    "authors": [
+        {
+            "name": "Zucandu",
+            "email": "zucdevs@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0.1"
+    }
+}
