@@ -38,4 +38,5 @@ $fp = fopen('access_token.txt', 'w');
 fwrite($fp, $resp);
 fclose($fp);
 
-exit;
+// You should redirect to your app dashboard when you have the access token
+echo "Completed!"; exit;
