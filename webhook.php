@@ -27,6 +27,11 @@ try {
 	curl_close($ch);
 
 	var_dump(json_decode($resp));
+
+    /**
+     * When you have this completed, you can try to create a new product and
+     * store all data into text file and see what it works
+     */
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
